@@ -1,16 +1,17 @@
-const express = require('express');
-const multer = require('multer');
-const uploadConfig = require('./config/upload');
+import React from 'react';
+import { Switch, Route } from 'react-router-dom';
 
-const PostController = require('./Controllers/PostController');
-const LikeController = require('./controllers/LikeController');
+import Feed from './pages/Feed';
+import New from './pages/New';
 
-const routes = new express.Router();
-const upload = multer(uploadConfig);
+function Routes() {
 
-routes.get('/posts', PostController.index);
-routes.post('/posts', upload.single('image'), PostController.store);
-routes.post('/posts/:id/like', LikeController.store);
+    return (
+        <Switch>
+            <Route path="/" exact component={Feed} />
+            <Route path="/New" component={New} />
+        </Switch>
+    );
+}
 
-module.exports = routes;
-
+export default Routes;
